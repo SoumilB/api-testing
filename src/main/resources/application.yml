@@ -1,0 +1,34 @@
+databricks:
+  jdbcUrl: jdbc:spark://${SPRING_DATABRICKS_INSTANCE}.azuredatabricks.net:443;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/${SPRING_DATABRICKS_OBJECT_ID}/${SPRING_DATABRICKS_CLUSTER_ID};AuthMech=3;UID=token;PWD=${SPRING_DATABRICKS_ACCESS_TOKEN};ServerVersion=3.0.0;FastConnection=1
+  driverClassName: com.simba.spark.jdbc.Driver
+
+api-management:
+  identifier: ${API_MANAGEMENT_IDENTIFIER}
+  key: ${API_MANAGEMENT_KEY}
+  expiration-delay-in-seconds: 300
+  service: ${API_MANAGEMENT_SERVICE}
+  subscription-id: ${API_MANAGEMENT_SUBSCRIPTION_ID}
+  resource-group: ${API_MANAGEMENT_RESOURCE_GROUP}
+  api-version: ${API_MANAGEMENT_API_VERSION}
+  telemetry_update_span: ${TELEMETRY_UPDATE_SPAN}
+  
+client-certificate:
+    thumbprint: ${CERTIFICATE_THUMBPRINT}
+    header: ${CERTIFICATE_HEADER}
+
+audit-datasource:
+  jdbcUrl: jdbc:sqlserver://${SPRING_DATASOURCE_SERVER}.database.windows.net:1433;database=${SPRING_DATASOURCE_DATABASE};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+  username: ${SPRING_DATASOURCE_USERNAME}
+  password: ${SPRING_DATASOURCE_PASSWORD}
+  driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+spring:
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
